@@ -28,11 +28,11 @@ const connectDB = () => {
     return client;
 }
 export const findInDB = async (model, field) => {
-    let user;
+    let result;
     const client = await connectDB()
-    if (field == 'ALL') user = await client.db().collection(model).find()
-    else user = await client.db().collection(model).findOne(field)
-    return user
+    if (field == 'ALL') result = await client.db().collection(model).find().toArray();
+    else result = await client.db().collection(model).findOne(field)
+    return result
 }
 
 export const insertInDB = async (model, document) => {
